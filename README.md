@@ -4,13 +4,15 @@ Web API for LXC.
 
 # How to use
 
+Place the server certificate in the /data/lxc/ directory and name the private key and certificate lxc-api.crt and lxc-api.key, respectively.
+
 From the root source tree :
 
 ```
-./lxc-api
+PATH=/your/lxc/bin:$PATH ./lxc-api
 ```
 
-After that, API listen on port 8000.
+After that, API listen on port 8000, WEB terminal listen on port 8001, SSH server listen on port 8022.
 
 # Documentation
 
@@ -148,7 +150,7 @@ curl -m 180 -X POST -H "Content-Type: application/json" -d '{
   "distribution": "ubuntu",
   "release": "lunar",
   "architecture": "arm64"
-}' http://localhost:8000/container/create
+}' http://localhost:8000/add/container
 ```
 响应：
 
@@ -165,7 +167,7 @@ curl -m 180 -X POST -H "Content-Type: application/json" -d '{
 ```
 curl -X POST -H "Content-Type: application/json" -d '{
   "del_container": "my-container"
-}' http://localhost:8000/container/destroy
+}' http://localhost:8000/del/container
 ```
 响应：
 
