@@ -19,9 +19,9 @@ PATH=/your/lxc/bin:$PATH ./lxc-api
 After that, API listen on port 8000, WEB terminal listen on port 8001, SSH server listen on port 8022.
 
 <div style="white-space:nowrap;">
-  <img src="./.assets/android_app_example_1.jpg" style="display:inline-block; width:33%; height:33%;" alt="1">
-  <img src="./.assets/android_app_example_2.jpg" style="display:inline-block; width:33%; height:33%;" alt="2">
-  <img src="./.assets/android_app_example_3.jpg" style="display:inline-block; width:33%; height:33%;" alt="3">
+  <img src="./.assets/android_app_example_1.jpg" style="display:inline-block; width:30%; height:30%;" alt="1">
+  <img src="./.assets/android_app_example_2.jpg" style="display:inline-block; width:30%; height:30%;" alt="2">
+  <img src="./.assets/android_app_example_3.jpg" style="display:inline-block; width:30%; height:30%;" alt="3">
 </div>
 
 # Documentation
