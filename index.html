@@ -4,30 +4,82 @@
 <head>
     <title>WebTerminal</title>
     <link rel="stylesheet" href="./node_modules/xterm/css/xterm.css" />
+    <style>
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
     <script src="./node_modules/xterm/lib/xterm.js"></script>
 </head>
 
 <body>
-    <div style="width: 736px; height: 408px;">
-        <!-- 目前版本的 Xterm 5.1.0 默认串口大小 24x80 -->
-        <div id="terminal"></div>
+    <div id="terminal"></div>
+    <div id="shortcut-buttons">
+        <button onclick="sendKey(27)">ESC</button>
+        <button onclick="sendTab()">Tab</button>
+        <button onclick="sendKey(36)">Home</button>
+        <button onclick="sendKey(35)">End</button>
+        <button onclick="sendKey(33)">Page Up</button>
+        <button onclick="sendKey(34)">Page Down</button>
+        <button onclick="sendKey(38)">↑</button>
+        <button onclick="sendKey(40)">↓</button>
+        <button onclick="sendKey(37)">←</button>
+        <button onclick="sendKey(39)">→</button>
+        <button onclick="sendKey(46)">Del</button>
+        <button onclick="sendCtrlC()">Ctrl+C</button>
+        <button onclick="sendCtrlD()">Ctrl+D</button>
+        <button onclick="sendCtrlL()">Ctrl+L</button>
     </div>
     <script>
         const term = new Terminal();
 
-        term.open(document.querySelector('#terminal')); // 挂载
+        term.open(document.querySelector('#terminal'));
 
-        const socket = new WebSocket(`ws://${window.location.host}/webterminal`); // 创建WebSocket连接
+        const socket = new WebSocket(`ws://${window.location.host}/webterminal`);
 
-        term.onData((data) => { // 网页xterm窗口中有输入的数据
-            // console.log('term.onData:', data);
-            socket.send(data); // 通过WebSocket发送给服务器
+        term.onData((data) => {
+            socket.send(data);
         });
-        
-        socket.onmessage = (event) => { // 收到来自服务器的WebSocket消息
-            // console.log('socket.onmessage:', event.data);
-            term.write(event.data); // 向xterm对象写入数据
+
+        socket.onmessage = (event) => {
+            term.write(event.data);
         };
+
+        function sendKey(keyCode) {
+            const keyEvent = new KeyboardEvent('keydown', { keyCode: keyCode });
+            term.textarea.dispatchEvent(keyEvent);
+        }
+
+        function sendCtrlC() {
+            const ctrlCEvent = new KeyboardEvent('keydown', { keyCode: 67, ctrlKey: true });
+            term.textarea.dispatchEvent(ctrlCEvent);
+        }
+
+        function sendCtrlD() {
+            const ctrlDEvent = new KeyboardEvent('keydown', { keyCode: 68, ctrlKey: true });
+            term.textarea.dispatchEvent(ctrlDEvent);
+        }
+
+        function sendCtrlL() {
+            const ctrlLEvent = new KeyboardEvent('keydown', { keyCode: 76, ctrlKey: true });
+            term.textarea.dispatchEvent(ctrlLEvent);
+        }
+
+        function sendTab() {
+            const tabEvent = new KeyboardEvent('keydown', { keyCode: 9 });
+            term.textarea.dispatchEvent(tabEvent);
+        }
     </script>
 </body>
 
