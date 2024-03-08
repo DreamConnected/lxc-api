@@ -4,7 +4,7 @@ Web API for LXC.
 
 # How to use
 
-Place the server certificate in the/data/lxc/directory and name the private key and certificate lxc api.crt, lxc api-key, and lxc api-ca.crt, respectively.
+Place the server certificate in the/data/lxc/ directory and name the private key and certificate lxc-api.crt, lxc-api-key, and lxc-api-ca.crt, respectively.
 
 For the client, you need to provide a p12 format client authentication certificate issued by lxc-api-ca.crt for Android.
 
