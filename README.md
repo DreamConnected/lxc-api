@@ -4,7 +4,11 @@ Web API for LXC.
 
 # How to use
 
-Place the server certificate in the /data/lxc/ directory and name the private key and certificate lxc-api.crt and lxc-api.key, respectively.
+Place the server certificate in the/data/lxc/directory and name the private key and certificate lxc api.crt, lxc api-key, and lxc api-ca.crt, respectively.
+
+For the client, you need to provide a p12 format client authentication certificate issued by lxc-api-ca.crt for Android.
+
+Note: Starting from version 1.2, API port 8000 forces the use of HTTP bidirectional authentication(Mutual TLS authentication).
 
 From the root source tree :
 
@@ -172,8 +176,13 @@ curl -X POST -H "Content-Type: application/json" -d '{
 响应：
 
 ```
+
 {
   "status_code": 200,
   "message": "Container destroyed successfully"
 }
 ```
+
+# Thanks
+
+- [NaisuXu / web-terminal-demo-with-golang-and-xterm](https://github.com/NaisuXu/web-terminal-demo-with-golang-and-xterm) : Web-terminal 实现
